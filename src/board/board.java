@@ -7,23 +7,8 @@ public class board {
 
     private String[][] board = new String[11][11];
 
-    public void fillBoard() {
-        char[] columnHead = new char[] { ' ', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J' };
-
-        for (String[] row : board) {
-            Arrays.fill(row, "  ");
-        }
-
-        for (int i = 0; i < 11; i++) {
-            String header = i == 0 ? " " : Integer.toString(i);
-            header = header.length() < 2 && header != " " ? "0" + header : header == " " ? " " : header;
-            board[0][i] = header;
-        }
-
-        for (int i = 1; i < 11; i++) {
-            board[i][0] = Character.toString(columnHead[i]);
-        }
-
+    public board() {
+        fillBoard();
     }
 
     public void showBoard() {
@@ -47,6 +32,23 @@ public class board {
 
         board[columnHeader][column] = "--";
         return true;
+    }
+
+    private void fillBoard() {
+        char[] columnHead = new char[] { ' ', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J' };
+
+        for (String[] row : board)
+            Arrays.fill(row, "  ");
+
+        for (int i = 0; i < 11; i++) {
+            String header = i == 0 ? " " : Integer.toString(i);
+            header = header.length() < 2 && header != " " ? "0" + header : header == " " ? " " : header;
+            board[0][i] = header;
+        }
+
+        for (int i = 1; i < 11; i++)
+            board[i][0] = Character.toString(columnHead[i]);
+
     }
 
     private void getBoardHeader() {
