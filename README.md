@@ -32,7 +32,7 @@ Java implementation in the console of the classic boardgame Battleship (Batalha 
 
 ### UML Class Diagram
 <p align="center">
-  <img align="center" height="128" src="https://app.genmymodel.com/api/projects/_H2HykF37Eeyzq6ra3GZCdA/diagrams/_H2Hyk137Eeyzq6ra3GZCdA/svg" />
+  <img align="center" src="https://app.genmymodel.com/api/projects/_H2HykF37Eeyzq6ra3GZCdA/diagrams/_H2Hyk137Eeyzq6ra3GZCdA/svg" />
 </p>
 
 ### Clone this repository
