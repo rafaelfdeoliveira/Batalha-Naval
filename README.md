@@ -1,7 +1,4 @@
-# Batalha-Naval
-Java implementation in the console of the classic boardgame Battleship (Batalha Naval in Portuguese)
-
-<h1>Clone NetFlix</h1>
+<h1>Batalha-Naval</h1>
 
 <p>Projeto final do modulo Java-Básico do curso Full-Stack organizado pelo Grupo Santander em parceria com a Let's Code</p>
 
