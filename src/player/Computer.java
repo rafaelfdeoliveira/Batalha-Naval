@@ -32,7 +32,6 @@ public class Computer extends Player {
     }
 
     //TRATAMENTO DA ENTRADA DO JOGADOR
-    @
     private String[] setArrayShot(String impPlayer) {
         String[] arrayShot = new String[2];
         for (int i = 0; i < arrayShot.length; i++) {
