@@ -9,10 +9,10 @@ public class Player {
     Random random = new Random();
 
     private String name;
-  //  private Board board;
-  //  private list<Ship> ship;
+    private Board board;
+    private list<Ship> ship;
 
-    /*
+
     public Player(String name, List<Ship> ships,Board board) {
         this.name;
         this.ships = ships;
@@ -22,7 +22,7 @@ public class Player {
     public Board getBoard() {
         return board;
     }
-    */
+
 
     public String[] setShip() {
         System.out.println("Pronto para posicionar seu navio...");
