@@ -1,13 +1,16 @@
 package board;
 
+import exceptions.IncorrectBoardCoordinateException;
+import exceptions.UnavailableBoardCoordinateException;
+
 import java.util.Arrays;
 import java.io.IOException;
 
-public class board {
+public class Board {
 
     private String[][] board = new String[11][11];
 
-    public board() {
+    public Board() {
         fillBoard();
     }
 
@@ -23,9 +26,24 @@ public class board {
         }
     }
 
+    public void placeShip (String shipSpot) throws Exception {
+        if (shipSpot.length() != 2 || !Fields.containsRow(shipSpot.substring(0, 1)) || !Fields.containsColumn(shipSpot.substring(1))) {
+            throw new IncorrectBoardCoordinateException();
+        }
+        int row = Fields.valueOf(shipSpot.substring(0, 1)).rowTitle;
+        int column = Integer.parseInt(shipSpot.substring(1));
+        if (hasShipInSpot(row, column)) throw new UnavailableBoardCoordinateException();
+        this.board[row][column] = "N";
+    }
+
+    private boolean hasShipInSpot (int row, int column) {
+        if (this.board[row][column].equals("N") || this.board[row][column].equals("n")) return true;
+        return false;
+    }
+
     public boolean makeAMove(char row, int column) {
 
-        int columnHeader = fields.valueOf(Character.toString(row)).rowTitle;
+        int columnHeader = Fields.valueOf(Character.toString(row)).rowTitle;
 
         if (board[columnHeader][column] != "  ")
             return false;

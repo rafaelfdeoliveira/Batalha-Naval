@@ -1,12 +1,10 @@
 package root;
 
-import player.Computer;
+import game.Game;
 
 public class Main {
 
     public static void main(String[] args) {
-      Computer computer = new Computer();
-      computer.setShip();
-      computer.setShot();
+        new Game();
     }
 }

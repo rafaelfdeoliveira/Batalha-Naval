@@ -3,7 +3,7 @@ package board;
 public class main {
 
     public static void main(String[] args) {
-        board board = new board();
+        Board board = new Board();
         board.showBoard();
 
         boolean moveResult;
@@ -33,7 +33,7 @@ public class main {
 
     }
 
-    public static void validateMovement(boolean moveResult, board board) {
+    public static void validateMovement(boolean moveResult, Board board) {
         board.showBoard();
 
         if (moveResult) {
