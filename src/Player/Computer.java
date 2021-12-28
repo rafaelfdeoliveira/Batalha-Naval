@@ -1,9 +1,9 @@
-package player;
+package Player;
 
-import board.Board;
-import board.Fields;
-import board.Ship;
-
+import Board.Board;
+import Board.Fields;
+import Board.Ship;
+import Board.Submarine;
 
 import java.util.List;
 
@@ -14,13 +14,10 @@ public class Computer extends Player {
     }
 
     @Override
-    void placeSubmarine () {
-        while (true) {
-            String shipSpot = Fields.getRowLetter(random.nextInt(10) + 1) + (random.nextInt(10) + 1);
-            try {
-                board.placeShip(shipSpot);
-                break;
-            } catch (Exception ignored) { }
+    void positionFleet () {
+        for (Ship ship : fleet) {
+            if (ship instanceof Submarine) placeSubmarineAutomatically();
+            // Can implement the logic to position ships bigger than a submarine here (ships with length greater than 1)
         }
     }
 

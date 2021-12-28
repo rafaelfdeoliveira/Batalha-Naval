@@ -1,9 +1,9 @@
-package game;
+package Game;
 
-import board.Ship;
-import board.Submarine;
-import player.Computer;
-import player.Player;
+import Board.Ship;
+import Board.Submarine;
+import Player.Computer;
+import Player.Player;
 
 import java.util.Arrays;
 import java.util.List;

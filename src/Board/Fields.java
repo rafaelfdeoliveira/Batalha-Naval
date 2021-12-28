@@ -1,4 +1,4 @@
-package board;
+package Board;
 
 public enum Fields {
     A(1),
@@ -28,7 +28,7 @@ public enum Fields {
     public static boolean containsColumn (String input) {
         int numberRows = values().length;
         try {
-            int column = Integer.parseInt(input);
+            int column = Integer.parseInt(input) + 1;
             return column > 0 && column <= numberRows;
         } catch (Error e) {
             return false;
