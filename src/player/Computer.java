@@ -1,5 +1,6 @@
 package player;
 
+import board.Board;
 import board.Fields;
 import board.Ship;
 
@@ -15,32 +16,23 @@ public class Computer extends Player {
     @Override
     void placeSubmarine () {
         while (true) {
-            String shipSpot = Fields.getRowLetter(random.nextInt(10) + 1) + Integer.toString(random.nextInt(10) + 1);
+            String shipSpot = Fields.getRowLetter(random.nextInt(10) + 1) + (random.nextInt(10) + 1);
             try {
-                this.board.placeShip(shipSpot);
+                board.placeShip(shipSpot);
                 break;
-            } catch (Exception e) { }
+            } catch (Exception ignored) { }
         }
     }
 
-//    @Override
-//    public String[] setShip() {
-//        String arrayLetter = "ABCDEFGHIJ";
-//        String impPlayer = (String) (String.valueOf(arrayLetter.charAt(random.nextInt(arrayLetter.length()))) + (random.nextInt(9) + 1));
-//        //Excluir Linha
-//        System.out.println(impPlayer);
-//        String[] ship = setArrayShot(impPlayer);
-//        return ship;
-//    }
-
     @Override
-    public String[] setShot() {
-        String arrayLetter = "ABCDEFGHIJ";
-        String impPlayer = (String) (String.valueOf(arrayLetter.charAt(random.nextInt(arrayLetter.length()))) + (random.nextInt(9) + 1));
-        //Excluir Linha
-        System.out.println(impPlayer);
-        String[] shot = setArrayShot(impPlayer);
-        return shot;
+    public void shoot (Board opponentBoard) {
+        while (true) {
+            String shotSpot = Fields.getRowLetter(random.nextInt(10) + 1) + (random.nextInt(10) + 1);
+            try {
+                board.placeShot(shotSpot, opponentBoard);
+                break;
+            } catch (Exception ignored) { }
+        }
     }
 
 }

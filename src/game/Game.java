@@ -14,16 +14,12 @@ public class Game {
     Scanner sc = new Scanner(System.in);
 
     public Game () {
-        String humanPlayerName = getAnswer("Insert the Player's name: ");
+        System.out.print("Insert the Player's name: ");
+        String humanPlayerName = sc.nextLine();
         List<Ship> fleet= getFleet();
         Player humanPlayer = new Player(humanPlayerName, fleet);
         Computer computerPlayer = new Computer(fleet);
         playGame(humanPlayer, computerPlayer);
-    }
-
-    private String getAnswer (String message) {
-        System.out.print(message);
-        return sc.nextLine();
     }
 
     private List<Ship> getFleet () {
@@ -36,10 +32,10 @@ public class Game {
 
     private Player getStartingPlayer (Player humanPlayer, Computer computerPlayer) {
         while (true) {
-            System.out.printf("Who starts the game, %s? (human or computer): ", humanPlayer.getName());
+            System.out.printf("Who starts the game, %s? (human or computer): ", humanPlayer.name);
             String answer = sc.nextLine();
-            if (answer == "human") return humanPlayer;
-            if (answer == "computer") return computerPlayer;
+            if (answer.equals("human")) return humanPlayer;
+            if (answer.equals("computer")) return computerPlayer;
             System.out.println("Invalid answer");
         }
     }
@@ -52,14 +48,27 @@ public class Game {
     private void playGame (Player humanPlayer, Computer computerPlayer) {
         Player currentPlayer = getStartingPlayer(humanPlayer, computerPlayer);
         Player opponentPlayer = getOtherPlayer(currentPlayer, humanPlayer, computerPlayer);
-        boolean gameOver = false;
-        while (!gameOver) {
-            String shot = currentPlayer.shoot();
-            opponentPlayer.board.getOpponentShot(shot);
-            gameOver = currentPlayer.board.hasWon();
-            currentPlayer.board.showBoard();
-            opponentPlayer = currentPlayer;
-            currentPlayer = getOtherPlayer(currentPlayer, humanPlayer, computerPlayer);
+        do {
+            boolean gameOver = false;
+            while (!gameOver) {
+                currentPlayer.shoot(opponentPlayer.board);
+                gameOver = currentPlayer.board.hasWon();
+                if (currentPlayer == humanPlayer) currentPlayer.board.showBoard();
+                opponentPlayer = currentPlayer;
+                currentPlayer = getOtherPlayer(currentPlayer, humanPlayer, computerPlayer);
+            }
+            humanPlayer.board.showBoard();
+            System.out.printf("%s won the Game!%n", opponentPlayer.name);
+        } while (shouldPlayAgain(humanPlayer.name));
+    }
+
+    private boolean shouldPlayAgain (String playerName) {
+        while (true) {
+            System.out.printf("Do you want to play again, %s? (y or n)", playerName);
+            String answer = sc.nextLine();
+            if (answer.equals("y")) return true;
+            if (answer.equals("n")) return false;
+            System.out.println("Answer y or n");
         }
     }
 }

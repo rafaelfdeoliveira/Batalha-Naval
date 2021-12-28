@@ -14,7 +14,7 @@ public enum Fields {
 
     int rowTitle;
 
-    private Fields(int rowTitle) {
+    Fields(int rowTitle) {
         this.rowTitle = rowTitle;
     }
 
