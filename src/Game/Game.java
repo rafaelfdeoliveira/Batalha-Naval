@@ -34,8 +34,8 @@ public class Game {
         while (true) {
             System.out.printf("Who starts the game, %s? (human or computer): ", humanPlayer.name);
             String answer = sc.nextLine();
-            if (answer.equals("human")) return humanPlayer;
-            if (answer.equals("computer")) return computerPlayer;
+            if (answer.toLowerCase().equals("human")) return humanPlayer;
+            if (answer.toLowerCase().equals("computer")) return computerPlayer;
             System.out.println("Invalid answer");
         }
     }
@@ -66,8 +66,8 @@ public class Game {
         while (true) {
             System.out.printf("Do you want to play again, %s? (y or n)", playerName);
             String answer = sc.nextLine();
-            if (answer.equals("y")) return true;
-            if (answer.equals("n")) return false;
+            if (answer.toLowerCase().equals("y")) return true;
+            if (answer.toLowerCase().equals("n")) return false;
             System.out.println("Answer y or n");
         }
     }

@@ -16,7 +16,7 @@ public class Board {
     }
 
     public void showBoard() {
-//        clearScreen();
+        clearScreen();
         showBoardHeader();
         for (char[] column : board) {
             System.out.print("| ");

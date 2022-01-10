@@ -53,8 +53,8 @@ public class Player {
         while (true) {
             System.out.printf("Do you want to position your fleet randomly, %s? (y or n) ", name);
             String answer = sc.nextLine();
-            if (answer.equals("y")) return true;
-            if (answer.equals("n")) return false;
+            if (answer.toLowerCase().equals("y")) return true;
+            if (answer.toLowerCase().equals("n")) return false;
             System.out.println("Answer y or n");
         }
     }
@@ -74,7 +74,7 @@ public class Player {
             System.out.print("Choose a spot to place a submarine (eg. B2): ");
             String shipSpot = sc.nextLine();
             try {
-                board.placeShip(shipSpot);
+                board.placeShip(shipSpot.toUpperCase());
                 break;
             } catch (Exception e) {
                 System.out.println(e.getMessage());
@@ -87,7 +87,7 @@ public class Player {
             System.out.print("Choose a spot to shoot (eg. B2): ");
             String shotSpot = sc.nextLine();
             try {
-                board.placeShot(shotSpot, opponentBoard);
+                board.placeShot(shotSpot.toUpperCase(), opponentBoard);
                 break;
             } catch (Exception e) {
                 System.out.println(e.getMessage());
