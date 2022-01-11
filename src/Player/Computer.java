@@ -24,7 +24,7 @@ public class Computer extends Player {
     @Override
     public void shoot (Board opponentBoard) {
         while (true) {
-            String shotSpot = Fields.getRowLetter(random.nextInt(10) + 1) + (random.nextInt(10) + 1);
+            String shotSpot = Fields.getRowLetter(random.nextInt(10) + 1) + (random.nextInt(10));
             try {
                 board.placeShot(shotSpot, opponentBoard);
                 break;

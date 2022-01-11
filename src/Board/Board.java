@@ -16,7 +16,6 @@ public class Board {
     }
 
     public void showBoard() {
-        clearScreen();
         showBoardHeader();
         for (char[] column : board) {
             System.out.print("| ");
@@ -24,16 +23,6 @@ public class Board {
                 System.out.print(row + " | ");
             }
             System.out.println("\n---------------------------------------------");
-        }
-    }
-
-    private void clearScreen () {
-        try {
-            if (System.getProperty("os.name").contains("Windows"))
-                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-            else
-                Runtime.getRuntime().exec("clear");
-        } catch (IOException | InterruptedException ignored) {
         }
     }
 
@@ -56,6 +45,9 @@ public class Board {
     }
 
     public void placeShot (String shotCoordinate, Board opponentBoard) throws Exception {
+
+        if (!playerName.toLowerCase().equals("computer")) clearScreen();
+
         checkValidCoordinate(shotCoordinate);
         int rowNumber = Fields.valueOf(shotCoordinate.substring(0, 1)).rowTitle;
         int column = Integer.parseInt(shotCoordinate.substring(1)) + 1;
@@ -64,12 +56,20 @@ public class Board {
         boolean shotHit = opponentBoard.getOpponentShot(rowNumber, column);
         if (shotHit) System.out.printf("%s hit an Enemy Ship%n", playerName);
         if (board[rowNumber][column] == ' ') {
-            if (shotHit) board[rowNumber][column] = '*';
-            else board[rowNumber][column] = '-';
+            if (shotHit) {
+                board[rowNumber][column] = '*';
+            }
+            else {
+                board[rowNumber][column] = '-';
+                System.out.printf("%s shot in the water%n", playerName);
+            }
         }
         else {
             if (shotHit) board[rowNumber][column] = 'X';
-            else board[rowNumber][column] = 'n';
+            else {
+                board[rowNumber][column] = 'n';
+                System.out.printf("%s shot in the water%n", playerName);
+            }
         }
     }
 
@@ -89,7 +89,7 @@ public class Board {
         return false;
     }
 
-    private void fillBoard () {
+    public void fillBoard () {
         for (char[] row : board) Arrays.fill(row, ' ');
         for (int i = 1; i <= Fields.values().length; i++) board[0][i] = Integer.toString(i - 1).charAt(0);
         for (int i = 1; i <= Fields.values().length; i++) board[i][0] = Fields.values()[i - 1].toString().charAt(0);
@@ -113,4 +113,13 @@ public class Board {
         return hitsOnEnemyShips == hitsToWin;
     }
 
+    public void clearScreen () {
+        try {
+            if (System.getProperty("os.name").contains("Windows"))
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            else
+                Runtime.getRuntime().exec("clear");
+        } catch (IOException | InterruptedException ignored) {
+        }
+    }
 }

@@ -90,9 +90,15 @@ public class Player {
                 board.placeShot(shotSpot.toUpperCase(), opponentBoard);
                 break;
             } catch (Exception e) {
+                board.showBoard();
                 System.out.println(e.getMessage());
             }
         }
+    }
+
+    public void resetPlayer(){
+        board.fillBoard();
+        positionFleet();
     }
 
 }
