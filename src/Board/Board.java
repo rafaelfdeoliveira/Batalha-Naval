@@ -26,6 +26,15 @@ public class Board {
         }
     }
 
+    public void showScore(String enemyName){
+        String scoreText = "Remaining " + enemyName + " ships : " + (hitsToWin - checkShipsCount());
+        String emptySpacesBefore = " ".repeat((43 - scoreText.length()) / 2);
+        String emptySpacesAfter = scoreText.length() % 2 == 0 ? emptySpacesBefore + " " : emptySpacesBefore;
+        System.out.println("---------------------------------------------");
+        System.out.println("|" + emptySpacesBefore + scoreText.toUpperCase() + emptySpacesAfter + "|");
+        System.out.println("---------------------------------------------");
+    }
+
     private void checkValidCoordinate (String coordinate) throws Exception {
         if ((coordinate.length() != 2) || !Fields.containsRow(coordinate.substring(0, 1)) || !Fields.containsColumn(coordinate.substring(1))) {
             throw new Exception("Incorrect Board Coordinate");
@@ -104,13 +113,7 @@ public class Board {
     }
 
     public boolean hasWon () {
-        int hitsOnEnemyShips = 0;
-        for (int i = 1; i < board.length; i++) {
-            for (int j = 1; j < board[i].length; j++) {
-                if (board[i][j] == '*' || board[i][j] == 'X') hitsOnEnemyShips++;
-            }
-        }
-        return hitsOnEnemyShips == hitsToWin;
+        return checkShipsCount() == hitsToWin;
     }
 
     public void clearScreen () {
@@ -122,4 +125,16 @@ public class Board {
         } catch (IOException | InterruptedException ignored) {
         }
     }
+
+    private int checkShipsCount (){
+        int hitsOnEnemyShips = 0;
+        for (int i = 1; i < board.length; i++) {
+            for (int j = 1; j < board[i].length; j++) {
+                if (board[i][j] == '*' || board[i][j] == 'X') hitsOnEnemyShips++;
+            }
+        }
+
+        return hitsOnEnemyShips;
+    }
+
 }

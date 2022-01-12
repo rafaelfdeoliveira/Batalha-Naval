@@ -74,7 +74,11 @@ public class Game {
 
                 currentPlayer.shoot(opponentPlayer.board);
                 gameOver = currentPlayer.board.hasWon();
-                if (currentPlayer == humanPlayer) currentPlayer.board.showBoard();
+                if (currentPlayer == humanPlayer) {
+                    currentPlayer.board.showBoard();
+                    computerPlayer.board.showScore("Player");
+                    humanPlayer.board.showScore(computerPlayer.name);
+                }
                 opponentPlayer = currentPlayer;
                 currentPlayer = getOtherPlayer(currentPlayer, humanPlayer, computerPlayer);
             }
