@@ -63,6 +63,17 @@ public class Game {
         return humanPlayer;
     }
 
+    private void shootAtAllPositionsInOpponentBoard(Player winnerPlayer, Player loserPlayer) {
+        char[] rows = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
+        for (int i = 0; i < rows.length; i++) {
+            for (int column = 1; column < 11; column++) {
+                try {
+                    winnerPlayer.board.placeShot(rows[i] + column, loserPlayer.board)
+                } catch (Exception ignore) { }
+            }
+        }
+    }
+
     private void playGame (Player humanPlayer, Computer computerPlayer) {
         Player currentPlayer = getStartingPlayer(humanPlayer, computerPlayer);
         Player opponentPlayer = getOtherPlayer(currentPlayer, humanPlayer, computerPlayer);
@@ -71,6 +82,14 @@ public class Game {
 
             boolean gameOver = false;
             while (!gameOver) {
+                // Uncomment the line below to make sure the computer will always win as the humanPlayer will never play
+                // if (currentPlayer == humanPlayer) continue;
+
+                // Uncomment the lines below to make sure the human player will always win
+                // shootAtAllPositionsInOpponentBoard(humanPlayer, computerPlayer);
+                // gameOver = true;
+                // opponentPlayer = humanPlayer;
+                // continue;
 
                 currentPlayer.shoot(opponentPlayer.board);
                 gameOver = currentPlayer.board.hasWon();
@@ -84,13 +103,9 @@ public class Game {
 
             System.out.printf("%s won the Game!%n", opponentPlayer.name);
 
+            if (getBooleanAnswer("Would you like to see the enemy board, %s? (y or n): ", humanPlayer.name)) computerPlayer.board.showBoard();
 
-            System.out.print("Would you like to see the enemy board? (y or n): ");
-            String answer = sc.nextLine();
-
-            if (answer.toLowerCase().equals("y")) computerPlayer.board.showBoard();
-
-            if (!shouldPlayAgain(humanPlayer.name)) break;
+            if (!getBooleanAnswer("Do you want to play again, %s? (y or n): ", humanPlayer.name)) break;
 
             humanPlayer.board.clearScreen();
             humanPlayer.resetPlayer();
@@ -98,9 +113,9 @@ public class Game {
         }
     }
 
-    private boolean shouldPlayAgain (String playerName) {
+    private boolean getBooleanAnswer (String question, String playerName) {
         while (true) {
-            System.out.printf("Do you want to play again, %s? (y or n): ", playerName);
+            System.out.printf(question, playerName);
             String answer = sc.nextLine();
             if (answer.toLowerCase().equals("y")) return true;
             if (answer.toLowerCase().equals("n")) return false;
